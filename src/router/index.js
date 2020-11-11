@@ -22,6 +22,11 @@ const routes = [
         name     : 'bottom_navigation',
         component: () => import( '@/views/bottom_navigation/' ),
     },
+    {
+        path     : '/buttons',
+        name     : 'buttons',
+        component: () => import( '@/views/buttons/' ),
+    },
 ]
 
 const router = new VueRouter( {

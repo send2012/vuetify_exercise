@@ -1,7 +1,7 @@
 import Vue       from 'vue';
 import VueRouter from 'vue-router';
 
-Vue.use( VueRouter )
+Vue.use( VueRouter );
 
 const routes = [
     {
@@ -27,7 +27,7 @@ const routes = [
         name     : 'buttons',
         component: () => import( '@/views/buttons/' ),
     },
-]
+];
 
 const router = new VueRouter( {
     routes,

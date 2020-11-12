@@ -22,6 +22,6 @@
             console.log(this.$vuetify.application.top);
 
             next();
-        }
+        },
     };
 </script>

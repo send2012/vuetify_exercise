@@ -15,17 +15,17 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ '@/views/about/'),
+        component: () => import( /* webpackChunkName: "about" */ '@/views/about/' ),
     },
     {
         path     : '/bottom-navigation',
         name     : 'bottom_navigation',
-        component: () => import( '@/views/bottom_navigation/' ),
+        component: () => import( /* webpackChunkName: "bottom_navigation" */ '@/views/bottom_navigation/' ),
     },
     {
         path     : '/buttons',
         name     : 'buttons',
-        component: () => import( '@/views/buttons/' ),
+        component: () => import( /* webpackChunkName: "buttons" */ '@/views/buttons/' ),
     },
 ];
 

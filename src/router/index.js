@@ -27,6 +27,11 @@ const routes = [
         name     : 'buttons',
         component: () => import( /* webpackChunkName: "buttons" */ '@/views/buttons/' ),
     },
+    {
+        path: '/calendars',
+        name: 'calendars',
+        component: () => import( /* webpackChunkName: "calendars" */ '@/views/calendars/' ),
+    },
 ];
 
 const router = new VueRouter( {

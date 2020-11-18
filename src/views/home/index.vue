@@ -43,6 +43,8 @@
                 },
                 {
                     id: 4,
+                    name: 'calendars',
+                    url: '/calendars',
                 },
             ],
         } ),

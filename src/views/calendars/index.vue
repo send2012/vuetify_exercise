@@ -1,5 +1,6 @@
 <template>
     <div class="calendars">
+        <!-- usage -->
         <div>
             <v-sheet tile
                      height="54"
@@ -62,6 +63,27 @@
                 ></v-calendar>
             </v-sheet>
         </div>
+
+        <!-- Day body -->
+        <div>
+            <v-row>
+                <v-col>
+                    <v-sheet height="500">
+                        <v-calendar ref="calendar"
+                                    v-model="value"
+                                    type="week"
+                        >
+                            <template v-slot:day-body="{ date, week }">
+                                <div class="v-current-time"
+                                     :class="{ first: date === week[ 0 ].data }"
+                                     :style="{ top: nowY }"
+                                ></div>
+                            </template>
+                        </v-calendar>
+                    </v-sheet>
+                </v-col>
+            </v-row>
+        </div>
     </div>
 </template>
 
@@ -70,6 +92,7 @@
         name: 'calendars',
 
         data: () => ( {
+            // usage -> start
             type    : 'month',
             types   : [
                 'month',
@@ -135,7 +158,7 @@
                     ],
                 },
             ],
-            value   : '',
+            // value   : '',
             events  : [],
             colors  : [
                 'blue',
@@ -156,10 +179,44 @@
                 'Conference',
                 'Party',
             ],
+            // usage -> end
+
+            // Day body -> start
+            value: '',
+            ready: false,
+            // Day body -> end
         } ),
 
+        computed: {
+            // Day body -> start
+            cal()
+            {
+                return this.ready ? this.$refs.calendar : null;
+            },
+
+            nowY()
+            {
+                return this.cal ? this.cal
+                                      .timeToY( this.cal.times.now ) + 'px'
+                                : '-10px';
+            },
+            // Day body -> end
+        },
+
+        mounted()
+        {
+            // Day body -> start
+            this.ready = true;
+
+            this.scrollToTime();
+
+            this.updateTime();
+            // Day body -> end
+        },
+
         methods: {
-            getEvents( { start, end } )
+            // usage -> start
+            getEvents( { start, end, } )
             {
                 const events = [];
 
@@ -197,6 +254,27 @@
             {
                 return Math.floor( ( b - a + 1 ) * Math.random() ) + a;
             },
+            // usage -> end
+
+            // Day -> start
+            getCurrentTime ()
+            {
+                return this.cal ? this.cal.times.now.hour * 60 + this.cal.times.now.minute : 0;
+            },
+
+            scrollToTime ()
+            {
+                const time = this.getCurrentTime();
+                const first = Math.max( 0, time - ( time % 30 ) - 30 );
+
+                this.cal.scrollToTime( first );
+            },
+
+            updateTime ()
+            {
+                setInterval( () => this.cal.updateTimes(), 60 * 1000 );
+            },
+            // Day -> end
         },
     };
 </script>
@@ -205,4 +283,26 @@
        scoped
 >
     @import "style";
+</style>
+
+<style lang="scss">
+    .v-current-time {
+        height: 2px;
+        background-color: #ea4335;
+        position: absolute;
+        left: -1px;
+        right: 0;
+        pointer-events: none;
+
+        &.first::before {
+            content: '';
+            position: absolute;
+            background-color: #ea4335;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-top: -5px;
+            margin-left: -6.5px;
+        }
+    }
 </style>

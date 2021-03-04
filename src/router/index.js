@@ -10,8 +10,8 @@ const routes = [
         component: () => import( '@/views/home/' ),
     },
     {
-        path     : '/about',
-        name     : 'About',
+        path: '/about',
+        name: 'About',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
@@ -28,9 +28,14 @@ const routes = [
         component: () => import( /* webpackChunkName: "buttons" */ '@/views/buttons/' ),
     },
     {
-        path: '/calendars',
-        name: 'calendars',
+        path     : '/calendars',
+        name     : 'calendars',
         component: () => import( /* webpackChunkName: "calendars" */ '@/views/calendars/' ),
+    },
+    {
+        path     : '/carousel',
+        name     : 'carousel',
+        component: () => import( /* webpackChunkName: "carousel" */ '@/views/carousel/' ),
     },
 ];
 
